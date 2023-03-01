@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppReact", "AppReact\AppReact.csproj", "{69222C6F-511B-4542-8E33-69DFCDDE6E1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppReactBL", "AppReactBL\AppReactBL.csproj", "{A2635E2C-CBFC-4A7F-8EAD-7FF52CF1B04E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppReactBL", "AppReactBL\AppReactBL.csproj", "{A2635E2C-CBFC-4A7F-8EAD-7FF52CF1B04E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppReactDL", "AppReactDL\AppReactDL.csproj", "{80C99EBD-3020-4A22-BB1B-9180624258FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppReactDL", "AppReactDL\AppReactDL.csproj", "{80C99EBD-3020-4A22-BB1B-9180624258FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

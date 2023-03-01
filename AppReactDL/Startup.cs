@@ -1,7 +1,10 @@
+using AppReactBL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,12 +31,11 @@ namespace AppReactDL
         public void ConfigureServices(IServiceCollection services)
         {
 
-            /*Pour activer la JSON Serializer
-            services.AddControllersWithViews().AddNewtonsoftJson(options =>
-            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
-                = new DefaultContractResolver());
-            )*/
+           // Pour activer la JSON Serializer
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            
 
             //Activer CORS (Permission de traiter les requetes venant d'autres noms de domaine)
             services.AddCors(c =>
@@ -45,6 +47,11 @@ namespace AppReactDL
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AppReactDL", Version = "v1" });
+            });
+
+            services.AddDbContext<appreactdbContext>(option =>
+            {
+                option.UseMySQL(Configuration.GetConnectionString("appreactcon"));
             });
         }
 
@@ -61,16 +68,22 @@ namespace AppReactDL
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AppReactDL v1"));
             }
+            
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                // route non-api urls to index.html
+                endpoints.MapFallbackToFile("/index.html");
             });
         }
     }

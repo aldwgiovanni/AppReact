@@ -21,7 +21,7 @@ namespace AppReact
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); //si on veut des controleur de vues .Net MVC
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -44,13 +44,13 @@ namespace AppReact
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection();// P}our les redirections vers une connexion https 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseRouting();
+            app.UseRouting(); //si on veut aue ce soit le moteur de Asp qui gere nos routes
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints => //le mappage des controlleurs
             {
                 endpoints.MapControllerRoute(
                     name: "default",
